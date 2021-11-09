@@ -4,11 +4,17 @@
 
 <h2>home template</h1>
 <div>
+
+
+<a href="{% url 'create-room'%}">Create Room</a>
   {% for room in rooms %}
+  <a href="/update-room/{{room.id}}">update</a>
+    <a href="/delete-room/{{room.id}}">delete</a>
   <div>
   <span>@{{room.host.username}}
   </span><h1>{{room.id}}--<a href="/room/{{room.id}}">{{room.name}}</a></h1>
   {{room.topic.name}}</div>
+  <hr>
   {%endfor%}
 
 
