@@ -45,6 +45,10 @@ class Message(models.Model):
     updated = models.DateTimeField(auto_now = True)  
     #  snapshot on ever item we saved
     created = models.DateTimeField(auto_now_add = True) 
+  
+#   using as the latest comments wherever it is used so ordering
+    class Meta:
+        ordering = ['-updated','-created']
     
     def __str__(self):
         return self.body[0:50]

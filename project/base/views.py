@@ -80,15 +80,18 @@ def home(request):
     topic = Topic.objects.all()
     # counts room to display in home.html
     room_count = rooms.count()   
+# this is for specific if we go to web development in recent activity 
+# only recent javascript activity will show
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
 
-    context = {'rooms':rooms,'topics':topic,'room_count':room_count}
+    context = {'rooms':rooms,'topics':topic,'room_count':room_count,'room_messages':room_messages}
     return render(request,'base/home.html',context)
 
 
 def room(request,pk):
     room = Room.objects.get(id=pk)
     # give the set of messages that are related to this specific room
-    roomMessages = room.message_set.all().order_by('-created')
+    roomMessages = room.message_set.all()
 
     participants = room.participants.all()
     
