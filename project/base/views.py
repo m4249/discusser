@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate,login,logout
 # for restricted pages what user and non user can see
 from django.contrib.auth.decorators import login_required
 from .models import Room, Topic
+# used for register page
+from django.contrib.auth.forms import UserCreationForm
 from .forms import RoomForm
 # Create your views here.
 # rooms = [
@@ -20,13 +22,14 @@ from .forms import RoomForm
 
 # dont use login()as it is built in funcn
 def loginPage(request):
+    page = 'login'
 #if user is in session if u go to /login it will take you to home
 # it will not prompt to login again if u go to /login
     if request.user.is_authenticated:
         return redirect('/')
-
+ 
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
         try:
@@ -41,12 +44,30 @@ def loginPage(request):
             return redirect('/')
         else:
             messages.error(request,'Username or password is incorrect')
-    context={}
+    context={'page':page}
     return render(request,'base/login_register.html',context)
 
 def logoutUser(request):
     logout(request)
     return redirect('/')
+
+def registerPage(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # if form valid user get created
+            user = form.save(commit=False)
+            user.username  = user.username.lower()
+            user.save()
+            # when registerd login function push them into session
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.error(request,'Cant get you in')
+
+    context={'form':form}
+    return render(request,'base/login_register.html',context)
 
 
 def home(request):
