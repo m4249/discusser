@@ -1,4 +1,9 @@
 # Creating database table 
+
+# whenever updating models.py u have to do 
+# python manage.py makemigrations
+# and python manage.py migrate then runserver
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,7 +21,8 @@ class Room(models.Model):
     topic =models.ForeignKey(Topic, on_delete=models.SET_NULL,null=True) 
     name = models.CharField(max_length = 200)
     description = models.TextField(null=True, blank=True)
-    # participants = 
+    # as we have foreign key for user so we use related name 
+    participants = models.ManyToManyField(User, related_name='participants',blank=True)
     # when first saved not everytime 
     updated = models.DateTimeField(auto_now = True)  
     #  snapshot on ever item we saved
@@ -38,6 +44,7 @@ class Message(models.Model):
     # when first saved not everytime 
     updated = models.DateTimeField(auto_now = True)  
     #  snapshot on ever item we saved
+    created = models.DateTimeField(auto_now_add = True) 
     
     def __str__(self):
         return self.body[0:50]
