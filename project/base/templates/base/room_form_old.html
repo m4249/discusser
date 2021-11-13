@@ -1,0 +1,11 @@
+{% extends 'main.html' %} {% block content%}
+
+<div>
+  <form method="POST" action="">
+    {% csrf_token %} {% comment %} user cannot mess with form {% endcomment %}
+    {{form.as_p}} {% comment %} .as_p(make it look better) {% endcomment %}
+    <input type="submit" value="submit" />
+  </form>
+</div>
+
+{%endblock content%}

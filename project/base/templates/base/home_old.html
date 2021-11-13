@@ -1,0 +1,27 @@
+{% extends 'main.html'%} {% block content%}
+<style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+</style>
+
+<div class="home-container">
+  {% include 'base/topics_component.html' %}
+
+  <!-- for feed -->
+<div>
+
+   <h2>home template</h1>
+      <h5>{{room_count}}room available</h5>
+      
+  {% include 'base/feed_component.html' %}
+
+</div>
+     
+  <!-- taking recent activity from activity_component.html -->
+
+  {% include 'base/activity_component.html' %}
+</div>
+
+{% endblock content%}
