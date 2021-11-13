@@ -6,3 +6,7 @@ class RoomForm(ModelForm):
     class Meta:
         model = Room
         fields = '__all__'
+
+        # will exclude host and participants from form.html
+        
+        exclude = ['host','participants']
