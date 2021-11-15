@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Room, Topic ,Message
 # used for register page
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RoomForm
+from .forms import RoomForm,UserForm
 # Create your views here.
 # rooms = [
 #     {'id':1,'name':'sam'},
@@ -200,5 +200,14 @@ def deleteMessage(request,pk):
 
 @login_required(login_url = '/login')
 def updateUser(request):
-    context={}
+    user = request.user
+    form = UserForm(instance = user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST,instance = user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile',pk = user.id)
+
+    context={'form':form}
     return render(request,'base/update-user.html',context)
