@@ -77,7 +77,7 @@ def home(request):
      Q(topic__name__icontains = q)|
      Q(name__icontains=q)|Q(description__icontains=q))
 
-    topic = Topic.objects.all()
+    topic = Topic.objects.all()[0:5]
     # counts room to display in home.html
     room_count = rooms.count()   
 # this is for specific if we go to web development in recent activity 
@@ -211,3 +211,10 @@ def updateUser(request):
 
     context={'form':form}
     return render(request,'base/update-user.html',context)
+
+
+def topicUser(request):
+    topics= Topic.objects.filter()
+    context={'topics':topics}
+    return render(request,'base/topics.html',context)
+
