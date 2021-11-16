@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.db.models import Q
 # for flash messages
@@ -8,10 +7,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 # for restricted pages what user and non user can see
 from django.contrib.auth.decorators import login_required
-from .models import Room, Topic ,Message
+from .models import Room, Topic ,Message, User
 # used for register page
-from django.contrib.auth.forms import UserCreationForm
-from .forms import RoomForm,UserForm
+
+from .forms import RoomForm,UserForm,MyUserCreationForm
 # Create your views here.
 # rooms = [
 #     {'id':1,'name':'sam'},
@@ -52,9 +51,9 @@ def logoutUser(request):
     return redirect('/')
 
 def registerPage(request):
-    form = UserCreationForm()
+    form = MyUserCreationForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
         if form.is_valid():
             # if form valid user get created
             user = form.save(commit=False)
@@ -204,7 +203,7 @@ def updateUser(request):
     form = UserForm(instance = user)
 
     if request.method == 'POST':
-        form = UserForm(request.POST,instance = user)
+        form = UserForm(request.POST,request.FILES,instance = user)
         if form.is_valid():
             form.save()
             return redirect('user-profile',pk = user.id)
