@@ -30,3 +30,7 @@ $ python manage.py runserver
 ## Contributing
 
 I love contributions, so please feel free to fix bugs, improve things, provide documentation. Just send a pull request.
+
+
+ScreenShots:
+![Alt text](/screenshots/ss1.PNG?raw=true "Optional Title")
