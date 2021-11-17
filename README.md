@@ -31,6 +31,8 @@ $ python manage.py runserver
 
 I love contributions, so please feel free to fix bugs, improve things, provide documentation. Just send a pull request.
 
+## ScreenShots:
 
-ScreenShots:
+###### Home Page
+
 ![Alt text](/screenshots/ss1.png?raw=true "Optional Title")
