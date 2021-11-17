@@ -33,4 +33,4 @@ I love contributions, so please feel free to fix bugs, improve things, provide d
 
 
 ScreenShots:
-![Alt text](/screenshots/ss1.PNG?raw=true "Optional Title")
+![Alt text](screenshots/ss1.PNG?raw=true "Optional Title")
