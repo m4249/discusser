@@ -149,4 +149,4 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # activate django_heroku
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
