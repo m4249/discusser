@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-b&k=r=!hj4slmjadnp$9c_uxxypdkrm6ei(p9f8(-c%u@tv04i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ['127.0.0.1','discusser55.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -133,6 +135,8 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # WHERE TO UPLOAD USER PROFILE PICTURE
 # if user gives photo then save it to static/images 
 MEDIA_ROOT = BASE_DIR / 'static/images'
